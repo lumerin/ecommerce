@@ -1,0 +1,42 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: orderapi-route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/oder/**
+          filters:
+            - PrefixPath=/api
+        - id: orchestration-route
+          uri: http://localhost:8082
+          predicates:
+            - Path=/orchestration/**
+          filters:
+            - PrefixPath=/api
+        - id: user-route
+          uri: http://localhost:8083
+          predicates:
+            - Path=/user/**
+          filters:
+            - PrefixPath=/api
+        - id: notif-route
+          uri: http://localhost:8084
+          predicates:
+            - Path=/notif/**
+          filters:
+            - PrefixPath=/api
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      show-details: always
+    gateway:
+      enabled: true
