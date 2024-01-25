@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class Order {
 
+	private Integer orderId;
+
 	private String action;
 
 	private Object data;
