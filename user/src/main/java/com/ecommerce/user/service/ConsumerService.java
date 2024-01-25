@@ -1,6 +1,7 @@
 package com.ecommerce.user.service;
 
 import com.ecommerce.user.model.OrderData;
+import com.ecommerce.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
@@ -29,9 +30,10 @@ public class ConsumerService {
         }
     }
 
-    @JmsListener(destination = "queue.rollback.user.register")
-    public void rollbackRegister(Message<String> message) {
+    @JmsListener(destination = "queue.user.register.rollback")
+    public void rollbackRegister(Message<OrderData> message) {
         try {
+            log.info("whole data : {}", message.getPayload().getData());
             userService.rollbackRegister(message.getPayload());
         } catch (Exception e) {
             log.error("Error while rollback register : {}", e.getMessage());
