@@ -1,9 +1,7 @@
 package com.ecommerce.notif.config;
 
-import com.ecommerce.notif.model.Order;
 import com.ecommerce.notif.model.OrderData;
 import com.ecommerce.notif.model.ResponseNotif;
-import com.ecommerce.notif.model.ResponseUser;
 import jakarta.jms.ConnectionFactory;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -32,9 +30,7 @@ public class JMSConfig {
     public MessageConverter jsonConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         Map<String, Class<?>> typeIdMappings = new HashMap<String, Class<?>>();
-        typeIdMappings.put("JMS_TYPE_ORDER", Order.class);
         typeIdMappings.put("JMS_TYPE_ORDERDATA", OrderData.class);
-        typeIdMappings.put("JMS_TYPE_RESPONSEUSER", ResponseUser.class);
         typeIdMappings.put("JMS_TYPE_RESPONSENOTIF", ResponseNotif.class);
 
 
